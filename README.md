@@ -14,6 +14,11 @@
 - [**Voiture Auto**]()
 	- [Creation d'un VA]()
 	- [Obtenir toutes les infos VAs]()	
+- [**Utilisateur**]()
+	- [Create Utilisateur]()
+	- [Get All Utilisateur]()
+	- [Get Utilisateur By Id]()
+	- [Delete Utilisateur]()
 
 
 
@@ -40,7 +45,12 @@ npm start
 
 ####Running
 
+Il faut préparer les données pour tester. Les données des arrêtes se trouvent sur la répertoire **ArretsData**, pour l'installer: 
 
+~~~bash
+cd ArretsData
+python post.py
+~~~
 
 
 
@@ -60,7 +70,7 @@ curl -X GET http://localhost:3000/arrets
 
 ~~~bash
 # Create une VA:
-curl -X POST "http://localhost:3000/va/create" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.34709},"nbrPersonne":1, "capacite":7, "dispo": True, "onMovement": True}'
+curl -X POST "http://localhost:3000/va/create" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.34709},"nbrPersonne":1, "capacite":7, "dispo": true, "onMovement": true}'
 ~~~
 ####Obtenir toutes les infos VAs	
 
@@ -82,4 +92,35 @@ http://localhost:3000/va/5876402fd48d458950a43839
 curl -X DELETE http://localhost:3000/va/5876402fd48d458950a43839
 
 ~~~
+
+###Utilisateur
+####Create Utilisateur
+
+~~~bash
+curl -X POST "http://localhost:3000/users/create" -H "Content-Type: application/json" -d '{"username":"
+lilei", "email":"Lilei@gmail.com", "passwordSalt":"passwordLilei", "role":"0"}'
+~~~
+
+
+####Get All Utilisateur
+
+~~~bash
+curl http://localhost:3000/users
+~~~
+
+####Get Utilisateur By Id
+
+~~~bash
+curl http://localhost:3000/users/587665e0180d8e93b1375b36
+~~~
+
+####Delete Utilisateur
+
+~~~bash
+curl -X DELETE http://localhost:3000/users/587665e0180d8e93b1375b36
+~~~
+
+
+
+
 

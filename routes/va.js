@@ -46,11 +46,25 @@ router.delete('/:va_id',function(req,res,next){
 
 
 
+router.post('/:va_id/montrer',function(req,res,next){
+  VehiculeAuto.findById(req.params.va_id, function(err,va){
+    if(err) return handleError(err);
 
+    va.loc = req.body.loc;
+    va.nbrPersonne += 1;
+    va.listePersonne.join(req.body.newClient);
+    va.trajetVa = req.body.newTrajetVa;
+    va.trajetUsers.join(req.body.trajetUserID);
 
+    va.dispo = va.capacite > va.nbrPersonne;
+    va.onMovement = true;
 
-
-
+    va.save(function(err,updateVa){
+      if(err) return next(err);
+      res.json(updateVa);
+    })
+  })
+});
 
 
 module.exports = router;

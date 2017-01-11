@@ -1,0 +1,23 @@
+{
+        "arrets" :
+        [
+                { "nom":"Epron Mairie", "lat":49.2228327, "lon":-0.370879 },
+                { "nom":"Eglise d'Epron", "lat":49.2215374, "lon":-0.3729479 },
+                { "nom":"Coquelicots", "lat":49.2193211, "lon":-0.3681615},
+                { "nom":"Rue de l'Energie", "lat":49.2166514, "lon":-0.3694925},
+                { "nom":"Couvrechef Le Clos", "lat":49.2133912, "lon":-0.3753152},
+                { "nom":"Clos Saint-Marc", "lat":49.2114286, "lon":-0.3732522},
+                { "nom":"CPAM", "lat":49.2098955, "lon":-0.3701443},
+                { "nom":"Campus 2 Centre Commercial", "lat":49.2092824, "lon":-0.3671516},
+                { "nom":"Girafe", "lat":49.2068257, "lon":-0.3678126},
+                { "nom":"Institut Camille Blaisot", "lat":49.2013788, "lon":-0.3700189},
+                { "nom":"Pere Sanson", "lat":49.2000743, "lon":-0.3688336},
+                { "nom":"Horatio Smith", "lat":49.200681, "lon":-0.3646085},
+                { "nom":"Calvaire Saint-Pierre", "lat":49.1987361, "lon":-0.3641403},
+                { "nom":"Vissol Sablons", "lat":49.1961104, "lon":-0.3660436},
+                { "nom":"Sablons", "lat":49.1947854, "lon":-0.3706775},
+                { "nom":"Courseulles", "lat":49.1924677, "lon":-0.3699551},
+                { "nom":"Rue de Bosnieres", "lat":49.1889629, "lon":-0.3698407},
+                { "nom":"Place de la Mare", "lat": 49.1866405, "lon":-0.3668167}
+        ]
+}

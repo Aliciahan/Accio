@@ -9,7 +9,7 @@ var utilisateurSchema = new Schema({
   username:{type:String, lowercase: true, required:true, unique:true},
   email:{type:String, unique:true, required:true},
   passwordSalt:{type:String, required:true},
-  passwordHash:{type:String, required:true},
+  //passwordHash:{type:String, required:true},
   role:{
     type:String, enum:['0','1','2','3','4'],
     default:'0',
