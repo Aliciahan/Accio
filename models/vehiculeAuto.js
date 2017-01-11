@@ -11,8 +11,9 @@ var vaSchema = new Schema({
   nbrPersonne: Number,
   capacite: Number,
   listePersonne: [Schema.Types.ObjectId],
-  trajetVa: Schema.Types.ObjectId,
-  trajetUsers: [Schema.Types.ObjectId]
+  trajetVa: [{lat:Number, lon:Number}],
+  trajetUsers: [Schema.Types.ObjectId],
+  diospo: Boolean,
 });
 
 var VehiculeAuto = mongoose.model('VehiculeAuto',vaSchema);
