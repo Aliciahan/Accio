@@ -85,7 +85,7 @@ router.post('/:va_id/decendre',function(req,res,next){
     va.trajetUsers.remove(req.body.trajetUserID);
 
     va.dispo = va.capacite > va.nbrPersonne;
-    va.onMovement = true;
+    va.onMovement = va.trajetUsers.length>0;
 
     va.save(function(err,updateVa){
       if(err) return next(err);
@@ -93,6 +93,23 @@ router.post('/:va_id/decendre',function(req,res,next){
     })
   })
 });
+
+router.post('/:va_id/misajour',function(req,res,next){
+  VehiculeAuto.findById(req.params.va_id, function(err,va){
+    if(err) next(err);
+
+    va.loc = req.body.loc;
+    va.trajetVa = req.body.newTrajetVa;
+
+    va.save(function(err,updateVa){
+      if(err) next(err);
+      res.json(updateVa);
+    })
+
+  })
+});
+
+
 
 
 module.exports = router;

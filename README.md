@@ -16,6 +16,7 @@
 	- [Obtenir toutes les infos VAs]()	
 	- [Montrer d'un Utilisateur]()
 	- [Decendre d'un Utilisateur]()
+	- [Mise A Jour Loc du VA]()
 - [**Utilisateur**]()
 	- [Create Utilisateur]()
 	- [Get All Utilisateur]()
@@ -107,7 +108,11 @@ curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/montrer" -H "Con
 ~~~bash
 curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/decendre" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.45}, "newClient":"58766603180d8e93b1375b37", "newTrajetVa":[{"lon":111,"lat":111},{"lon":2,"lat":222}], "trajetUserID":"58766603180d8e93b1375b37"}'
 ~~~
+####Mise A Jour Loc du VA
 
+~~~bash
+curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/misajour" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.45}, "newTrajetVa":[{"lon":111,"lat":111},{"lon":2,"lat":333}]}'
+~~~
 
 
 
