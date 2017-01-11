@@ -52,9 +52,37 @@ router.post('/:va_id/montrer',function(req,res,next){
 
     va.loc = req.body.loc;
     va.nbrPersonne += 1;
-    va.listePersonne.join(req.body.newClient);
+    va.listePersonne.push(req.body.newClient);
     va.trajetVa = req.body.newTrajetVa;
-    va.trajetUsers.join(req.body.trajetUserID);
+    va.trajetUsers.push(req.body.trajetUserID);
+
+    va.dispo = va.capacite > va.nbrPersonne;
+    va.onMovement = true;
+
+    va.save(function(err,updateVa){
+      if(err) return next(err);
+      res.json(updateVa);
+    })
+  })
+});
+
+
+router.post('/:va_id/decendre',function(req,res,next){
+  VehiculeAuto.findById(req.params.va_id, function(err,va){
+    if(err) next(err);
+
+    Array.prototype.remove = function(val) {
+      var index = this.indexOf(val);
+      if (index > -1) {
+        this.splice(index, 1);
+      }
+    };
+
+    va.loc = req.body.loc;
+    va.nbrPersonne -= 1;
+    va.listePersonne.remove(req.body.newClient);
+    va.trajetVa = req.body.newTrajetVa;
+    va.trajetUsers.remove(req.body.trajetUserID);
 
     va.dispo = va.capacite > va.nbrPersonne;
     va.onMovement = true;

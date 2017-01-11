@@ -14,6 +14,8 @@
 - [**Voiture Auto**]()
 	- [Creation d'un VA]()
 	- [Obtenir toutes les infos VAs]()	
+	- [Montrer d'un Utilisateur]()
+	- [Decendre d'un Utilisateur]()
 - [**Utilisateur**]()
 	- [Create Utilisateur]()
 	- [Get All Utilisateur]()
@@ -91,8 +93,23 @@ http://localhost:3000/va/5876402fd48d458950a43839
 
 ~~~bash
 curl -X DELETE http://localhost:3000/va/5876402fd48d458950a43839
-
 ~~~
+
+
+####Montrer d'un Utilisateur
+
+~~~bash
+curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/montrer" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.44}, "newClient":"58766603180d8e93b1375b37", "newTrajetVa":[{"lon":111,"lat":111},{"lon":2,"lat":222}], "trajetUserID":"58766603180d8e93b1375b37"}'
+~~~
+
+####Decendre d'un Utilisateur
+
+~~~bash
+curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/decendre" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.45}, "newClient":"58766603180d8e93b1375b37", "newTrajetVa":[{"lon":111,"lat":111},{"lon":2,"lat":222}], "trajetUserID":"58766603180d8e93b1375b37"}'
+~~~
+
+
+
 
 ###Utilisateur
 ####Create Utilisateur

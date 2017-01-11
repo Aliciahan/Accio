@@ -19,4 +19,5 @@ var vaSchema = new Schema({
 
 var VehiculeAuto = mongoose.model('VehiculeAuto',vaSchema);
 
+
 module.exports = VehiculeAuto;
