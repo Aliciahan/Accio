@@ -6,11 +6,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var locationSchema = new Schema({
-  lon:{type:Number, required:true},
-  lat:{type:Number, required:true}
-
+  lon:{type: Number, required:true},
+  lat:{type: Number, required:true}
 });
 
-var Location = mongoose.model('Location',locationSchema);
-module.exports = Location;
+module.exports = locationSchema;
 

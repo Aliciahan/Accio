@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var locateSchema = require('./location.js');
 var vaSchema = new Schema({
 
-  loc :{type:locateSchema, required:true},
+  loc :{ type: locateSchema, required:true},
   nbrPersonne: Number,
   capacite: Number,
   listePersonne: [Schema.Types.ObjectId],
@@ -15,5 +15,6 @@ var vaSchema = new Schema({
   trajetUsers: [Schema.Types.ObjectId]
 });
 
-var TrajetVA = mongoose.model('TrajetVA',trajetVASchema);
-module.exports = TrajetVA;
+var VehiculeAuto = mongoose.model('VehiculeAuto',vaSchema);
+
+module.exports = VehiculeAuto;

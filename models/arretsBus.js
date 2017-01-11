@@ -4,13 +4,22 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var locateSchema = require('./location.js');
 
+var arretsBusSchema = new Schema(
+  {
+  location:{
+    lat:Number,
+    lon:Number
+  },
+  nom: String
+  }
+);
 
-var arretsBusSchema = new Schema({
-  loc:{type:locateSchema},
-  nom: {type:String}
-});
+arretsBusSchema.methods.test= function(){
+  return 0
+};
+
 
 var ArretsBus = mongoose.model('ArretsBus',arretsBusSchema);
-module.exports = ArretsBus;
+
+exports.module = ArretsBus;
