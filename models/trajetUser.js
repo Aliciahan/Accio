@@ -10,7 +10,8 @@ var Schema = mongoose.Schema;
 
 var trajetUserSchema = new Schema({
   userName: Schema.Types.ObjectId,
-  trajet:[{lon:Number,lat:Number}],
+  depart:{lon:Number,lat:Number},
+  arrivee:{lon:Number,lat:Number},
   reserve:{type:Boolean},
   timeStamp: {type:Number},
   maxAttant:{type: Number}

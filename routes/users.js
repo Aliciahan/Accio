@@ -33,6 +33,22 @@ router.delete('/:va_id',function(req,res,next){
   })
 });
 
+router.post('/:va_id/addtrajet', function(req,res,next){
+  User.findById(req.params.va_id,function(err,userUp){
+    if(err) next(err);
+
+    userUp.trajet.depart = req.body.depart;
+    userUp.trajet.arrivee = req.body.arrivee;
+    userUp.trajet.reserve = req.body.reserve;
+    userUp.trajet.timeStamp = req.body.reserve;
+    userUp.trajet.maxAttant = req.body.maxAttant;
+
+    userUp.save(function(err,updateUser){
+      if(err) next(err);
+      res.json(updateUser);
+    })
+  })
+});
 
 
 module.exports = router;

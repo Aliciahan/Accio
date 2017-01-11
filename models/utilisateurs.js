@@ -15,7 +15,13 @@ var utilisateurSchema = new Schema({
     default:'0',
     required: true
   },
-  trajet:{type: Schema.Types.ObjectId}
+  trajet:{
+    depart:{lon:Number,lat:Number},
+    arrivee:{lon:Number,lat:Number},
+    reserve:{type:Boolean},
+    timeStamp: {type:Number},
+    maxAttant:{type: Number}
+  }
 });
 
 var User = mongoose.model('User',utilisateurSchema);

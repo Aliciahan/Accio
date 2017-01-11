@@ -48,7 +48,7 @@ router.delete('/:va_id',function(req,res,next){
 
 router.post('/:va_id/montrer',function(req,res,next){
   VehiculeAuto.findById(req.params.va_id, function(err,va){
-    if(err) return handleError(err);
+    if(err) next(err);
 
     va.loc = req.body.loc;
     va.nbrPersonne += 1;
