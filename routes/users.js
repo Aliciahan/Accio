@@ -40,7 +40,7 @@ router.post('/:va_id/addtrajet', function(req,res,next){
     userUp.trajet.depart = req.body.depart;
     userUp.trajet.arrivee = req.body.arrivee;
     userUp.trajet.reserve = req.body.reserve;
-    userUp.trajet.timeStamp = req.body.reserve;
+    userUp.trajet.timeStamp = req.body.timeStamp;
     userUp.trajet.maxAttant = req.body.maxAttant;
 
     userUp.save(function(err,updateUser){

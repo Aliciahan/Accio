@@ -19,6 +19,7 @@
 	- [Get All Utilisateur]()
 	- [Get Utilisateur By Id]()
 	- [Delete Utilisateur]()
+	- [Ajouter Trajet Utilisateur]()
 
 
 
@@ -119,6 +120,15 @@ curl http://localhost:3000/users/587665e0180d8e93b1375b36
 ~~~bash
 curl -X DELETE http://localhost:3000/users/587665e0180d8e93b1375b36
 ~~~
+
+####Ajouter Trajet Utilisateur
+
+~~~bash
+curl -X POST "http://localhost:3000/users/58766603180d8e93b1375b37/addtrajet" -H "Content-Type: application/json" -d '{"depart":{"lon":123,"lat":456},"arrivee":{"lon":321,"lat":543}, "reserve":false, "timeStamp":3333, "maxAttant":44444}'
+~~~
+
+
+
 
 
 
