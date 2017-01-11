@@ -28,6 +28,7 @@ router.get('/all',function (req,res,next) {
 });
 
 router.get('/:va_id',function(req,res,next){
+
   VehiculeAuto.find({_id:req.params.va_id},function(err,details){
     if(err) next(err);
     res.json(details);
