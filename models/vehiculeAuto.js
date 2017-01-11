@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var locateSchema = require('./location.js');
 var vaSchema = new Schema({
 
-  loc :{ type: locateSchema, required:true},
+  loc :{type: {lat:Number, lon:Number}, required:true},
   nbrPersonne: Number,
   capacite: Number,
   listePersonne: [Schema.Types.ObjectId],

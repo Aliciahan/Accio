@@ -12,7 +12,7 @@ require('./models/utilisateurs');
 require('./models/trajetUser');
 require('./models/trajetVA');
 require('./models/vehiculeAuto');
-
+require('./models/centerCtrl');
 
 
 
@@ -20,6 +20,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var va = require('./routes/va');
 var arrets = require('./routes/arrets');
+var centerctrl = require('./routes/centerctrl');
 mongoose.connect('mongodb://localhost/accio');
 
 var app = express();
@@ -40,6 +41,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/va',va);
 app.use('/arrets',arrets);
+app.use('/centerctrl',centerctrl);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

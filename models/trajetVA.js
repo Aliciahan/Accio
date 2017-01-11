@@ -7,13 +7,10 @@ var locateSchema = require('./location.js');
 
 
 var trajetVASchema = new Schema({
-
-  trajet:[locateSchema]
-  //reserve:{type:Boolean},
-  //timeStamp: {type:Number},
-  //maxAttant:{type: Number}
+  trajet:[{lon:Number,lat:Number}]
 });
 
 var TrajetVA = mongoose.model('TrajetVA',trajetVASchema);
 module.exports = TrajetVA;
+
 

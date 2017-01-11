@@ -4,12 +4,13 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var locateSchema = require('./location.js');
+
 
 
 
 var trajetUserSchema = new Schema({
-  trajet:[locateSchema],
+  userName: Schema.Types.ObjectId,
+  trajet:[{lon:Number,lat:Number}],
   reserve:{type:Boolean},
   timeStamp: {type:Number},
   maxAttant:{type: Number}
