@@ -1,0 +1,10 @@
+{
+        "detours" : 
+        [
+                { "nom":"Parking Cote de Nacre", "lat":49.207884, "lon":-0.370162 },
+                { "nom":"Parking a Velo Petit Clos", "lat":49.2117179, "lon":-0.3737351 },
+                { "nom":"Parking a Velo Cote de Nacre", "lat":49.2094721, "lon":-0.3658065},
+                { "nom":"Parking a Velo Lycee Victor Hugo", "lat":49.199129, "lon":-0.3655717},
+                { "nom":"Parking a Velo Vallee des Jardins", "lat":49.1933396, "lon":-0.3723709}
+        ]
+}

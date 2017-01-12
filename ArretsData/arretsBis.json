@@ -1,0 +1,10 @@
+{
+        "arretsBis" : 
+        [
+                { "nom":"Rue des Tisserands", "lat":49.205481, "lon":-0.373463},
+                { "nom":"Les Luthiers", "lat":49.209223, "lon":-0.374195},
+                { "nom":"Marechal Juin", "lat":49.210644, "lon":-0.365367},
+                { "nom":"CIFAC", "lat":49.211616, "lon":-0.359464},
+                { "nom":"EFS", "lat":49.206485, "lon":-0.359394}
+        ]
+}

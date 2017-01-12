@@ -14,10 +14,30 @@ var User  = require('../models/utilisateurs');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  reqApi3(49.2193211, -0.3681615,49.2166514, -0.3694925,"1170b7cf-8fd0-4796-86f5-de3ca31c5d45");
+  res.json(reqApi3(49.2193211, -0.3681615,49.2166514, -0.3694925,"1170b7cf-8fd0-4796-86f5-de3ca31c5d45"));
 
-  res.render('index', { title: 'Express' });
 });
+
+
+router.post('/demande', function(req,res,next) {
+  VehiculeAuto.find({dispo: true, onMovement: true}, function (err, resultat) {
+    if (err) next(err);
+    if (resultat.length > 0) {
+      return true;
+    } else {
+      VehiculeAuto.find({dispo: true}, function (err, resultat) {
+        if (err) next(err);
+        if (resultat.lengh > 0) {
+          return true;
+        } else {
+          return JSON.parse({decision: false});
+        }
+      });
+    }
+  });
+});
+
+
 
 
 var reqApi3 = function(oriLat,oriLon,destLat,destLon,apiKey){
