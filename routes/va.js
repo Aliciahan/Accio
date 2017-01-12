@@ -388,25 +388,25 @@ function countDistances() {
     points.push(new Point(49.2166514, -0.3694925));
 
     //var uri="https://maps.googleapis.com/maps/api/directions/json?origin=49.2193211,-0.3681615&destination=49.2166514,-0.3694925&key=AIzaSyDQY_P21Hi8DS2ax03CxCwEKzk-AJucQWc";//&sensor=false&departure_time=1343605500&mode=transit;
-          var uri ="http://graphhopper.com/api/1/route?point="+points[0].x.toString()+"%2C"+
+          var uri ="https://www.graphhopper.com/api/1/route?point="+points[0].x.toString()+"%2C"+
               points[0].y.toString()+"&point="+points[1].x.toString()+"%2C"+points[1].y.toString()+
               "&vehicle=car&locale=de&key="+apikey;
     console.log(uri);
-           /* xmlHttp = new XMLHttpRequest();
-    xmlHttp.
-           xmlHttp.open( "GET", uri, false ); // false for synchronous request
-            xmlHttp.setRequestHeader("Access-Control-Allow-Origin", "*");
-           xmlHttp.send( null );
+    xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", uri, false ); // false for synchronous request
+    //xmlHttp.setRequestHeader("Content-Type: text/html");
+    xmlHttp.setRequestHeader("Accept: application/json");
+    xmlHttp.send();
           // dis[i][j] = JSON.parse(xmlHttp.responseText.routes[0].legs[0].duration.value);
             dis[i][j] = JSON.parse(xmlHttp.responseText.paths[0].time);
             //dis[i][j] = (Math.random() * 20);
-            compteur++;*/
+            compteur++;
 
 
-   /*   }
-    }*/
+      }
+    //}
 
-    http.get(uri, (res) => {
+   /*http.get(uri, (res) => {
         const statusCode = res.statusCode;
     const contentType = res.headers['content-type'];
 
@@ -432,7 +432,7 @@ function countDistances() {
 }).on('error', (e) => {
         console.log(`Got error: ${e.message}`);
 });
-}
+}*/
 
 /////////////////////////////////
 
