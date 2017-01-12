@@ -32,13 +32,41 @@ function getTragetUser(req,res,next){
   })
 }
 
+var calcNote= function(usersInfos){
+  var resultat =[];
+  //console.log(usersInfos+"hello");
+  initData(usersInfos);
+  GAInitialize();
+
+  resultat.push(bestValue);
+  resultat.push(getItineraire());
+
+  return resultat;
+};
+
+
 router.post('/demande', getTragetUser,function(req,res,next) {
   VehiculeAuto.find({dispo: true, onMovement: true}, function (err, resultat) {
     if (err) next(err);
     if (resultat.length > 0) {
       //la situation dispo et onMovement
-
       //res.json(resultat);
+      var newIte = req.body.newIte;
+
+      //console.log("newItem:"+req.body.newIte.toString());
+      var meilleurChoix=[];
+
+      for (var i=0; i<resultat.length;i++){
+        /////////////
+
+        var testData = resultat[i].detailsUsers;
+        console.log(testData.toString());
+        testData.push(newIte);
+        console.log("testData:"+testData);
+        meilleurChoix.push(calcNote(testData));
+
+      }
+      res.send(meilleurChoix+"hello");
 
     } else {
       VehiculeAuto.find({dispo: true}, function (err, resultat) {
@@ -57,6 +85,17 @@ router.post('/demande', getTragetUser,function(req,res,next) {
   });
 });
 
+function getItineraire(){
+  var size=best.length;
+  var itineraire="";
+  for(var i=0;i<size;i++){
+    itineraire+='{"lat":"'+points[best[i]].x.toString()+'","lon":"'+points[best[i]].y.toString()+'"}';
+    if(i!=size-1) {
+      itineraire += ",";
+    }
+  }
+  return '{"itineraire":['+itineraire+"]}";
+}
 // var boucle = function (objVA){
 //   //return [Best idVA, [liste newTrajet]]
 //   for (var i =0; i<objVA.length; i++){
@@ -167,8 +206,8 @@ var trajet;
 
 var points = [];
 
-// var points_depart = [];
-// var points_arrivee = [];
+ var points_depart = [];
+ var points_arrivee = [];
 
 /*router.get('/test',function (req,res,next) {
 
@@ -219,7 +258,7 @@ function initData(arrUsers) {
 }
 
 function GAInitialize() {
-  //countDistances();
+  countDistances();
 
   for(var i=0; i<POPULATION_SIZE; i++) {
     var chemin = randomIndivial(points_depart,points_arrivee);
@@ -416,6 +455,7 @@ function pushMutate(seq) {
 }
 function setBestValue() {
   for(var i=0; i<population.length; i++) {
+    //console.log("polutaion i = "+population[i].toString());
     values[i] = evaluate(population[i]);
   }
   currentBest = getCurrentBest();
@@ -493,15 +533,12 @@ function position(tab, n){
 
 
 function evaluate(indivial) {
-  var sum = dis[
-    indivial[0]
-    ]
-    [
-    indivial
-      [
-    indivial.length - 1
-      ]
-    ];
+  //console.log("-----------------");
+  //console.log(indivial[0]);
+  var sum = dis[indivial[0]]
+    [indivial[indivial.length - 1]];
+
+
   for(var i=1; i<indivial.length; i++) {
     sum += dis[indivial[i]][indivial[i-1]];
   }
@@ -526,9 +563,12 @@ function countDistances() {
       xmlHttp = new XMLHttpRequest();
       xmlHttp.open("GET", uri, false); // false for synchronous request
       //xmlHttp.setRequestHeader("Content-Type: text/html");
-      xmlHttp.setRequestHeader("Accept: application/json");
+      //xmlHttp.setRequestHeader("Accept: application/json");
       xmlHttp.send();
-      dis[i][j] = JSON.parse(xmlHttp.responseText.paths[0].time);
+
+      var resuu = JSON.parse(xmlHttp.responseText);
+      dis[i][j] = resuu.paths[0].time;
+      //dis[i][j] = JSON.parse(xmlHttp.responseText.paths[0].time);
 
     }
   }
