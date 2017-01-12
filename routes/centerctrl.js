@@ -4,12 +4,18 @@
 
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
+
 
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var xmlHttp = new XMLHttpRequest();
-
+//var syncRequest = require ('sync-request');
 var VehiculeAuto = require('../models/vehiculeAuto');
 var User  = require('../models/utilisateurs');
+
+var Promise = require('bluebird');
+Promise.promisifyAll(mongoose);
+
 
 
 /* GET home page. */
@@ -18,15 +24,27 @@ router.get('/', function(req, res, next) {
 
 });
 
+function getTragetUser(req,res,next){
+  User.find().where('_id').in(req.ids).exec(function(err,data){
+    if(err) next(err);
+    req.userDatas = data;
+    return next();
+  })
+}
 
-router.post('/demande', function(req,res,next) {
+router.post('/demande', getTragetUser,function(req,res,next) {
   VehiculeAuto.find({dispo: true, onMovement: true}, function (err, resultat) {
     if (err) next(err);
     if (resultat.length > 0) {
       //la situation dispo et onMovement
-      boucle(resultat);
-
+      //boucle(resultat);
       //res.json(resultat);
+      //res.json(resultat);
+      console.log("on est la");
+      getTragetUser(["58775e36c6e5c5b54fcf5174"]);
+      res.send( req.userDatas );
+      //res.json(resultat);
+
     } else {
       VehiculeAuto.find({dispo: true}, function (err, resultat) {
         if (err) next(err);
@@ -44,38 +62,72 @@ router.post('/demande', function(req,res,next) {
   });
 });
 
-var boucle = function (objVA){
-  //return [Best idVA, [liste newTrajet]]
-
-  for (var i =0; i<objVA.length; i++){
-    scoreVA(objVA[i]);
-  }
-
-};
-
-
-var scoreVA = function(vaObjet){
-  //return [score, [liste New Trajet]]
-
-  var tjs = vaObjet.trajetUsers;
-  var trajetUsersAcient=[];
-
-
-    User.find()
-      .where('_id').in(tjs).exec(function(err,body){
-        if(err) next(err);
-        trajetUsersAcient.push(body);
-      });
-
-  console.log(trajetUsersAcient);
-
-  //initData(allUsers);
-  //GAInitialize();
-
-
-
-};
-
+// var boucle = function (objVA){
+//   //return [Best idVA, [liste newTrajet]]
+//   for (var i =0; i<objVA.length; i++){
+// scoreVA(objVA[i]);
+// }
+//
+// };
+//
+//
+//
+// var scoreVA = function(vaObjet){
+//   //return [score, [liste New Trajet]]
+//
+//   var tjs = vaObjet.trajetUsers;
+//   console.log(tjs);
+//   getUserTra(tjs[0]);
+//
+//   //initData(allUsers);
+//   //GAInitialize();
+//
+// };
+//
+// function getUserTra(vaObjet,callback){
+//   tjs = vaObjet.trajetUsers;
+//   console.log(tjs);
+//   User.find().exec(function(err, data){
+//     console.log(data);
+//   });
+// }
+//
+//
+// function findIds(ids){
+//   return new Promise(
+//     function(resolve,rejet){
+//     User.find(function(err,da){
+//       if (err) next(err);
+//       resolve({trajet:da});
+//     }).where('_id').in(ids);
+//   }
+//   )
+// }
+// var reqTrajetPerson = function(ids){
+//   console.log(findIds(ids));
+//
+//   // console.log("here");
+//   // sr = syncRequest('GET',"http://127.0.0.1:3000/users/"+ids[0], {
+//   //   'headers': {
+//   //     'user-agent': 'example-user-agent'
+//   //   }
+//   // });
+//   // console.log(sr.getBody());
+//   /*var resu = [];
+//
+//   for (var i=0; i<ids.length;i++){
+//     var uri ="http://localhost:3000/users/"+ids[i];
+//     console.log(uri);
+//     xmlHttp = new XMLHttpRequest();
+//     xmlHttp.open( "get",uri,false); // false for synchronous request
+//     //xmlHttp.setRequestHeader("Content-Type: text/html");
+//     //xmlHttp.setRequestHeader("Accept: application/json");
+//     xmlHttp.send();
+//     console.log(JSON.parse(xmlHttp.responseText));
+//     //resu.push ();
+//   }
+//   return resu*/
+// };
 
 var reqApi3 = function(oriLat,oriLon,destLat,destLon,apiKey){
   var uri ="https://www.graphhopper.com/api/1/route?point="+oriLat.toString()+"%2C"+oriLon.toString()+"&point="+destLat.toString()+"%2C"+destLon.toString()+"&vehicle=car&locale=de&key="+apiKey;
