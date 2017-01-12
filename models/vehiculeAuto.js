@@ -13,6 +13,10 @@ var vaSchema = new Schema({
   listePersonne: [Schema.Types.ObjectId],
   trajetVa: [{lat:Number, lon:Number}],
   trajetUsers: [Schema.Types.ObjectId],
+  detailsUsers:[
+    {
+    depart:{lon:Number,lat:Number},
+    arrivee:{lon:Number,lat:Number}, userID:Schema.Types.ObjectId}],
   dispo: Boolean,
   onMovement:Boolean
 });

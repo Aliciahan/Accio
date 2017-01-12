@@ -1,0 +1,90 @@
+curl -X POST "http://localhost:3000/arrets" -H "Content-Type: application/json" -d '{"location":{"lat":49.18165,"lon":-0.34709},"nom":"Le Dôme"}'
+
+curl -X DELETE "http://localhost:3000/arrets/58756def64f0a665246e9aa1"
+
+
+
+# Create une VA:
+curl -X POST "http://localhost:3000/va/create" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.34709},"nbrPersonne":1, "capacite":7, "dispo": True, "onMovement": True}'
+
+# Obtenir toutes VA:
+curl http://localhost:3000/va/all
+
+
+#Montrer dans une VA
+
+curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/montrer" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.44}, "newClient":"58766603180d8e93b1375b37", "newTrajetVa":[{"lon":111,"lat":111},{"lon":2,"lat":222}], "trajetUserID":"58766603180d8e93b1375b37"}'
+
+curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/decendre" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.45}, "newClient":"58766603180d8e93b1375b37", "newTrajetVa":[{"lon":111,"lat":111},{"lon":2,"lat":222}], "trajetUserID":"58766603180d8e93b1375b37"}'
+
+
+curl -X POST "http://localhost:3000/va/58765bdb42adc39073f88679/misajour" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.45}, "newTrajetVa":[{"lon":111,"lat":111},{"lon":2,"lat":333}]}'
+
+
+
+curl -X POST "http://localhost:3000/users" -H "Content-Type: application/json" -d '{"username":"lilei", "email":"Lilei@gmail.com", passwordSalt:"passwordLilei", "role":"0"}'
+
+curl -X POST "http://localhost:3000/users" -H "Content-Type: application/json" -d '{"username":"lilei3", "email":"3Lilei@gmail.com", passwordSalt:"passwordLilei3", "role":"0"}'
+
+curl -X POST "http://localhost:3000/users/58766603180d8e93b1375b37/addtrajet" -H "Content-Type: application/json" -d '{"depart":{"lon":123,"lat":456},"arrivee":{"lon":321,"lat":543}, "reserve":false, "timeStamp":3333, "maxAttant":44444}'
+
+
+
+##Create VAS:
+
+
+
+
+
+curl -X POST "http://localhost:3000/va/create" -H "Content-Type: application/json" -d '{"loc":{"lat":49.18165,"lon":-0.34709},"nbrPersonne":1,"capacite":7, "dispo": true, "onMovement": true}'
+
+
+
+
+
+##Create Users for test-----------------------------------------------------------------------------------
+#User1----------------------------------
+
+curl -X POST "http://localhost:3000/users/create" -H "Content-Type: application/json" -d '{"username":"A","email":"A@gmail.com","passwordSalt":"passwordLilei", "role":"0" }'
+
+curl -X POST "http://localhost:3000/users/5877db1c5e8663dc21c7e974/addtrajet" -H "Content-Type: application/json" -d '{"depart":{"lat":49.2228327, "lon":-0.370879},"arrivee":{"lat":49.2092824, "lon":-0.3671516}, "reserve":true, "timeStamp":3333, "maxAttant":44444}'
+
+#User2-----------------------------------------
+curl -X POST "http://localhost:3000/users/create" -H "Content-Type: application/json" -d '{"username":"B","email":"B@gmail.com","passwordSalt":"passwordLilei", "role":"0" }'
+
+curl -X POST "http://localhost:3000/users/5877db605e8663dc21c7e975/addtrajet" -H "Content-Type: application/json" -d '{"depart":{"lat":49.2114286, "lon":-0.3732522},"arrivee":{"lat": 49.1866405, "lon":-0.3668167}, "reserve":true, "timeStamp":3333, "maxAttant":44444}'
+
+#User3---------------------------------------------------------
+
+curl -X POST "http://localhost:3000/users/create" -H "Content-Type: application/json" -d '{"username":"c","email":"c@gmail.com","passwordSalt":"passwordLilei", "role":"0" }'
+
+curl -X POST "http://localhost:3000/users/5877db885e8663dc21c7e976/addtrajet" -H "Content-Type: application/json" -d '{"depart":{"lat":49.205481, "lon":-0.373463},"arrivee":{"lat":49.206485, "lon":-0.359394}, "reserve":true, "timeStamp":3333, "maxAttant":44444}'
+#------------------------------------------------------------------------------------
+### Create VA ### VA1
+curl -X POST "http://localhost:3000/va/create" -H "Content-Type: application/json" -d '{"loc":{"lat":49.2228327, "lon":-0.370879 },"nbrPersonne":0, "capacite":7, "dispo": true, "onMovement": true}'
+#-------------------------------------------------------------------------VA2
+curl -X POST "http://localhost:3000/va/create" -H "Content-Type: application/json" -d '{"loc":{"lat":49.2114286, "lon":-0.3732522},"nbrPersonne":0, "capacite":7, "dispo": true, "onMovement": true}'
+#-----------------------------------------------------------
+curl -X POST "http://localhost:3000/va/create" -H "Content-Type: application/json" -d '{"loc":{"lat":49.205481, "lon":-0.373463},"nbrPersonne":0, "capacite":7, "dispo": true, "onMovement": true}'
+
+
+
+#Montrer Utilisateur
+curl -X POST "http://localhost:3000/va/5877dbc45e8663dc21c7e977/montrer" -H "Content-Type: application/json" -d '{"loc":{"lat":49.2228327, "lon":-0.370879}, "newClient":"5877db1c5e8663dc21c7e974", "newTrajetVa":[{"lat":49.2228327, "lon":-0.370879},{"lat":49.2092824, "lon":-0.3671516}], "trajetUserID":"58775e36c6e5c5b54fcf5174", "detailsUsers": {"depart":{"lat":49.2228327, "lon":-0.370879},"arrivee":{"lat":49.2092824, "lon":-0.3671516},"userID":"5877db1c5e8663dc21c7e974"}}'
+
+
+curl -X POST "http://localhost:3000/va/5877dbd05e8663dc21c7e978/montrer" -H "Content-Type: application/json" -d '{"loc":{"lat":49.2228327, "lon":-0.370879}, "newClient":"5877db605e8663dc21c7e975", "newTrajetVa":[{"lat":49.2228327, "lon":-0.370879},{"lat":49.2092824, "lon":-0.3671516}], "trajetUserID":"5877db605e8663dc21c7e975", "detailsUsers": {"depart":{"lat":49.2114286, "lon":-0.3732522},"arrivee":{"lat": 49.1866405, "lon":-0.3668167},"userID":"5877db605e8663dc21c7e975"}}'
+
+
+curl -X POST "http://localhost:3000/va/5877dbd95e8663dc21c7e979/montrer" -H "Content-Type: application/json" -d '{"loc":{"lat":49.2228327, "lon":-0.370879}, "newClient":"5877db885e8663dc21c7e976", "newTrajetVa":[{"lat":49.2228327, "lon":-0.370879},{"lat":49.2092824, "lon":-0.3671516}], "trajetUserID":"5877db885e8663dc21c7e976", "detailsUsers": {"depart":{"lat":49.205481, "lon":-0.373463},"arrivee":{"lat":49.206485, "lon":-0.359394},"userID":"5877db885e8663dc21c7e976"}}'
+
+
+
+
+
+curl -X POST "http://localhost:3000/va/5877616bc6e5c5b54fcf5178/montrer" -H "Content-Type: application/json" -d '{"loc":{"lat":49.2114286, "lon":-0.3732522}, "newClient":"58775f40c6e5c5b54fcf5175", "newTrajetVa":[{"lat":49.2114286, "lon":-0.3732522},{"lat": 49.1866405, "lon":-0.3668167}], "trajetUserID":"58775f40c6e5c5b54fcf5175"}'
+
+curl -X POST "http://localhost:3000/va/58776173c6e5c5b54fcf5179/montrer" -H "Content-Type: application/json" -d '{"loc":{"lat":49.205481, "lon":-0.373463}, "newClient":"58775fc9c6e5c5b54fcf5176", "newTrajetVa":[{"lat":49.205481, "lon":-0.373463},{"lat":49.206485, "lon":-0.359394}], "trajetUserID":"58775fc9c6e5c5b54fcf5176"}'
+
+
+curl -X POST http://locaohost:3000/centerctrl/demande -H "Content-Type: application/json" -d {}

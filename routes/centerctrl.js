@@ -37,12 +37,7 @@ router.post('/demande', getTragetUser,function(req,res,next) {
     if (err) next(err);
     if (resultat.length > 0) {
       //la situation dispo et onMovement
-      //boucle(resultat);
-      //res.json(resultat);
-      //res.json(resultat);
-      console.log("on est la");
-      getTragetUser(["58775e36c6e5c5b54fcf5174"]);
-      res.send( req.userDatas );
+
       //res.json(resultat);
 
     } else {

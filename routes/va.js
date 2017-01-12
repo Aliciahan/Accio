@@ -55,7 +55,7 @@ router.post('/:va_id/montrer',function(req,res,next){
     va.listePersonne.push(req.body.newClient);
     va.trajetVa = req.body.newTrajetVa;
     va.trajetUsers.push(req.body.trajetUserID);
-
+    va.detailsUsers.push(req.body.detailsUsers);
     va.dispo = va.capacite > va.nbrPersonne;
     va.onMovement = true;
 
@@ -81,6 +81,14 @@ router.post('/:va_id/decendre',function(req,res,next){
     va.loc = req.body.loc;
     va.nbrPersonne -= 1;
     va.listePersonne.remove(req.body.newClient);
+
+    var x = [];
+    for (var i=0; i<detailsUsers.length;i++){
+      if(detailsUsers[i].userID!=req.body.newClient){
+        x.push(detailsUsers[i]);
+      }
+    }
+    va.detailsUsers = x;
     va.trajetVa = req.body.newTrajetVa;
     va.trajetUsers.remove(req.body.trajetUserID);
 
