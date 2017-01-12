@@ -5,7 +5,7 @@
 	- [Introduction](#Introduction)
 	- [Install Environnement](#Install-Environnement)
 	- [Install]()
-	- [Running]()
+	- [Prepare Running]()
 - [**Arrêtes VA**]()
 	- [Ajouter un point VA]()
 	- [Obtenir tous les points VA]()
@@ -29,9 +29,12 @@
 
 ###INFORMATION
 ####Introduction
+Dans ce projet intense, nous voulons de optimiser le problème du "decision making" de voiture auto. Le projet est divisé en 3 parties, une partie de **Service(ce projet)** pour la décision, une partie du **logiciel device Android** pour la côté Client, et une partie du **GPS Voiture Auto** qui mise à jour à chaque l'instant la position de la voiture et la comportement montré/décentre client. 
+
 ####Install Environnement
 __Dependance:__
-
+Pour installation voir le site officiel du logiciels listés ci-dessous:
+ 
 - NodeJS
 - Express
 - Express-generator
@@ -39,7 +42,13 @@ __Dependance:__
 
 ####Install
 
+- Créer la répertoire pour la base de données
+- Installer dépendances du projet avec npm
+- Mettre en démarche MongoDB avec ___mongod___ 
+- **Start** le projet avec npm start
+
 ~~~bash
+rm -rf ./data
 mkdir data
 npm install
 mongod --dbpath ./data 
@@ -47,7 +56,7 @@ npm start
 ~~~
 
 
-####Running
+####Prepare Running
 
 Il faut préparer les données pour tester. Les données des arrêtes se trouvent sur la répertoire **ArretsData**, pour l'installer: 
 
@@ -59,14 +68,56 @@ python post.py
 
 
 
-**API ArretsBus**
+###Arrêtes VA
+Resemblable à l'arret BUS, qui sert à positioner le point intérêt de notre service.
+
+####Ajouter un point VA
+
+- **Type Request**: POST
+- **Content-Type**: application/json
+- **Params du Body**:
+	- location: 
+		- lat:Num
+		- lon:Num
+	- nom: String
+- **exemple**:
 
 ~~~bash
 curl -X POST "http://localhost:3000/arrets" -H "Content-Type: application/json" -d '{"location":{"lat":49.18165,"lon":-0.34709},"nom":"Le Dôme"}'
+~~~
 
-curl -X DELETE "http://localhost:3000/arrets/58756def64f0a665246e9aa1"
+####Obtenir tous les points VA
 
+- **Type Request**: GET
+- **Content-Type**: application/json
+- **Params du Body**: null
+- **exemple**:
+
+~~~bash
 curl -X GET http://localhost:3000/arrets
+~~~
+
+####Delete un point VA
+- **Type Request**: DELETE
+- **Content-Type**: application/json
+- **Params du Body**:null
+- **exemple**:
+
+~~~bash
+curl -X DELETE "http://localhost:3000/arrets/58756def64f0a665246e9aa1"
+~~~
+
+
+
+####Obtenir information d'un certain point
+
+- **Type Request**: GET
+- **Content-Type**: application/json
+- **Params du Body**: null
+- **exemple**:
+
+~~~bash
+curl -X GET "http://localhost:3000/arrets/58756def64f0a665246e9aa1"
 ~~~
 
 ###Voiture Auto
