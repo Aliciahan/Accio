@@ -45,6 +45,38 @@ var calcNote= function(usersInfos){
 };
 
 
+var updateUser = function (updateData){
+  //console.log(updateData.userID+"userID Get");
+  User.findById(updateData.userID, function(err,upUser){
+    if(err) next(err);
+
+    upUser.trajet.depart= updateData.newIte.depart;
+    upUser.trajet.arrivee = updateData.newIte.arrivee;
+
+    upUser.save(function(err,upUp){
+      if(err) next(err);
+      console.log('userInfo Updated');
+    })
+  })
+};
+
+var updateVa = function (updateData){
+  VehiculeAuto.findById(updateData.nameVa, function(err,va){
+    if(err) next(err);
+    va.nbrPersonne+=1;
+    va.listePersonne.push(updateData.userID);
+    va.trajetVa = updateData.bestIte;
+    va.trajetUsers.push(updateData.userID);
+    va.detailsUsers.push(updateData.newIte);
+    va.dispo = va.capacite > va.nbrPersonne;
+    va.onMovement = true;
+    va.save(function(err,updateVa){
+      if (err) return next(err);
+      console.log('Information VA updated')
+    })
+  })
+};
+
 router.post('/demande', getTragetUser,function(req,res,next) {
   VehiculeAuto.find({dispo: true, onMovement: true}, function (err, resultat) {
     if (err) next(err);
@@ -60,25 +92,69 @@ router.post('/demande', getTragetUser,function(req,res,next) {
         /////////////
 
         var testData = resultat[i].detailsUsers;
-        console.log(testData.toString());
         testData.push(newIte);
-        console.log("testData:"+testData);
         meilleurChoix.push(calcNote(testData));
 
       }
-      res.send(meilleurChoix+"hello");
+
+      //position de best score
+      var scoresGet = [];
+      for (var j =0; j<meilleurChoix.length;j++){
+        scoresGet.push(meilleurChoix[j][0]);
+      }
+      var bestPosistionA = scoresGet.indexOf(Math.min.apply(Math,scoresGet));
+
+      var resuuu = meilleurChoix[bestPosistionA];
+      console.log('bestScore:'+resuuu[0]);
+
+      var responseForme = {'nameVa':resultat[bestPosistionA]._id, 'bestIte' : JSON.parse(resuuu[1]).itineraire, 'userID':req.body.userID ,'newIte':req.body.newIte, 'decision':true};
+
+      updateUser(responseForme);
+      updateVa(responseForme);
+
+      res.json(responseForme);
+
 
     } else {
       VehiculeAuto.find({dispo: true}, function (err, resultat) {
         if (err) next(err);
         if (resultat.lengh > 0) {
           //la situation dispo
+          var newIte = req.body.newIte;
 
-          res.json(resultat);
+          //console.log("newItem:"+req.body.newIte.toString());
+          var meilleurChoix=[];
+
+          for (var i=0; i<resultat.length;i++){
+            /////////////
+
+            var testData = resultat[i].detailsUsers;
+            testData.push(newIte);
+            meilleurChoix.push(calcNote(testData));
+
+          }
+
+          //position de best score
+          var scoresGet = [];
+          for (var j =0; j<meilleurChoix.length;j++){
+            scoresGet.push(meilleurChoix[j][0]);
+          }
+          var bestPosistionA = scoresGet.indexOf(Math.min.apply(Math,scoresGet));
+
+          var resuuu = meilleurChoix[bestPosistionA];
+          console.log('bestScore:'+resuuu[0]);
+
+          var responseForme = {'nameVa':resultat[bestPosistionA]._id, 'bestIte' : JSON.parse(resuuu[1]).itineraire, 'userID':req.body.userID ,'newIte':req.body.newIte,'decision':true};
+
+          updateUser(responseForme);
+          updateVa(responseForme);
+
+          res.json(responseForme);
+
         } else {
 
           //la situation non service
-          return JSON.parse({decision: false});
+          return JSON.parse({'decision': false});
         }
       });
     }
@@ -247,6 +323,12 @@ function initData(arrUsers) {
   time=0;
   //apikey="AIzaSyDQY_P21Hi8DS2ax03CxCwEKzk-AJucQWc";
   apikey="1170b7cf-8fd0-4796-86f5-de3ca31c5d45";
+
+  //clean up donnees
+
+  points_depart=[];
+  points_arrivee=[];
+  points=[];
 
   for (var i=0; i<arrUsers.length;i++){
     points_depart.push(new Point(arrUsers[i].depart.lat,arrUsers[i].depart.lon));

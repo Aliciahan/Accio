@@ -23,6 +23,8 @@
 	- [Get Utilisateur By Id]()
 	- [Delete Utilisateur]()
 	- [Ajouter Trajet Utilisateur]()
+- [**Centre Contrôleur**]
+	- [Recevoir Demande Utilisateur]()
 
 
 
@@ -198,6 +200,19 @@ curl -X DELETE http://localhost:3000/users/587665e0180d8e93b1375b36
 
 ~~~bash
 curl -X POST "http://localhost:3000/users/58766603180d8e93b1375b37/addtrajet" -H "Content-Type: application/json" -d '{"depart":{"lon":123,"lat":456},"arrivee":{"lon":321,"lat":543}, "reserve":false, "timeStamp":3333, "maxAttant":44444}'
+~~~
+
+
+###Centre Contrôleur
+####Recevoir Demande Utilisateur
+
+~~~bash
+ curl -X POST http://localhost:3000/centerctrl/demande -H "Content-Type: application/json" -d '{"newIte":{ "depart": {"lat":49.209223,"lon":-0.374195},"arrive
+e":{"lat":49.206485, "lon":-0.359394} },"userID":"5877e7dfc14974dfdcda34cf"}'
+
+
+#Réponse:
+{"nameVa":"5877dbd95e8663dc21c7e979","bestIte":[{"lat":"49.209223","lon":"-0.374195"},{"lat":"49.205481","lon":"-0.373463"},{"lat":"49.206485","lon":"-0.359394"},{"lat":"49.206485","lon":"-0.359394"}],"userID":"5877e7dfc14974dfdcda34cf","newIte":{"depart":{"lat":49.209223,"lon":-0.374195},"arrivee":{"lat":49.206485,"lon":-0.359394}}}
 ~~~
 
 
